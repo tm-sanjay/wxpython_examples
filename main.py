@@ -26,12 +26,35 @@ class MyBoxSizer(wx.Panel):
         #must add in the end when sizer is created
         self.SetSizer(vbox)
 
+# Panel for Grid Sizer
+class MyGridSizer(wx.Panel):
+    def __init__(self,parent):
+        super(MyGridSizer,self).__init__(parent)
+        
+        wx.StaticText (self, label='Grid Sizer')
+        
+        # grid(x,y,spaceX,spaceY)                     
+        gridSizer = wx.GridSizer(4,5,3,6)
+        """
+        # adds labels as grid elements
+        for i in range(1,21):
+            ele = 'element-'+ str(i)
+            gridSizer.Add(wx.StaticText(self, label = ele), 0, wx.EXPAND)
+            self.SetSizer(gridSizer)
+        """
+        # adds buttons as grid elements
+        for i in range(1,21):
+            btn = 'button-'+ str(i)
+            gridSizer.Add(wx.Button(self, label = btn), 0, wx.EXPAND)
+            self.SetSizer(gridSizer)
+
 #Frame for the UI
 class MyFrame(wx.Frame):
     def __init__(self, parent, title):
         super(MyFrame,self).__init__(parent, title=title, size=(500,300))
         
-        self.panel = MyBoxSizer(self)
+        # self.panel = MyBoxSizer(self)
+        MyGridSizer(self)
 
 class MyApp(wx.App):
     def OnInit(self):
