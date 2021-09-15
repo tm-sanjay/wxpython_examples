@@ -29,7 +29,7 @@ class MyBoxSizer(wx.Panel):
 #Frame for the UI
 class MyFrame(wx.Frame):
     def __init__(self, parent, title):
-        super(MyFrame,self).__init__(parent, title=title, size=(500,400))
+        super(MyFrame,self).__init__(parent, title=title, size=(500,300))
         
         self.panel = MyBoxSizer(self)
 
