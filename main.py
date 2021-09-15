@@ -48,13 +48,58 @@ class MyGridSizer(wx.Panel):
             gridSizer.Add(wx.Button(self, label = btn), 0, wx.EXPAND)
             self.SetSizer(gridSizer)
 
+class MyButtonEvent(wx.Panel):
+    def __init__(self, parent):
+        super().__init__(parent)
+        
+        self.title = wx.StaticText(self, label='Button Event')
+        
+        self.label1 = wx.StaticText(self, label='Not Clicked')
+        self.label2 = wx.StaticText(self, label='Toggle')
+        
+        self.btn = wx.Button(self, label = "Click")
+        self.btn.Bind(wx.EVT_BUTTON,self.onClick)
+        
+        self.toggleBtn = wx.ToggleButton(self, label='Toggle')
+        self.toggleBtn.Bind(wx.EVT_TOGGLEBUTTON, self.onToggle)
+        
+        image = wx.Image("images/play.png", wx.BITMAP_TYPE_ANY).ConvertToBitmap()
+        self.bitmapBtn = wx.BitmapButton(self, id = -1, bitmap = image,size = (image.GetWidth()+100 ,image.GetHeight()+100))
+        self.bitmapBtn.SetLabel("Play")
+        
+        sizer = wx.BoxSizer(wx.VERTICAL)
+        sizer.Add(self.title, 0, wx.ALIGN_CENTER)
+        sizer.Add(self.label1)
+        sizer.Add(self.btn)
+        sizer.Add(self.label2)
+        sizer.Add(self.toggleBtn)
+        sizer.Add(self.bitmapBtn)
+        
+        #must add in the end when sizer is created
+        self.SetSizer(sizer)
+    
+    def onClick(self, event):
+        self.label1.SetLabelText("Button CLicked")
+    
+    def onToggle(self, event):
+        state = event.GetEventObject().GetValue()
+        
+        if state == True:
+            self.label2.SetLabel("OFF")
+            event.GetEventObject().SetLabel("Click to OFF")
+        else:
+            self.label2.SetLabel("ON")
+            event.GetEventObject().SetLabel("Click to ON")
+
 #Frame for the UI
 class MyFrame(wx.Frame):
     def __init__(self, parent, title):
         super(MyFrame,self).__init__(parent, title=title, size=(500,300))
         
+        # add your panel here
         # self.panel = MyBoxSizer(self)
-        MyGridSizer(self)
+        # MyGridSizer(self)
+        MyButtonEvent(self)
 
 class MyApp(wx.App):
     def OnInit(self):
