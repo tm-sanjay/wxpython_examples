@@ -11,3 +11,7 @@ Gridsizer with `label` as elements, chek the [code](https://github.com/tm-sanjay
 
 ![Image of Grid Sizer](./screenshots/gridsizer1.PNG)  
 Gridsizer with `button` as elements, check the [code](https://github.com/tm-sanjay/wxpython_examples/blob/f05ef1e9451f21a5fc4da00003ddb926963e1ac6/main.py#L46-L49)
+
+## Button Event
+![Image of Grid Sizer](./screenshots/button_event.PNG)  
+Button with click event, toggle, bitmap image. Check the [code](https://github.com/tm-sanjay/wxpython_examples/blob/273e2a55d8ed96001d5521890d6603fecac8985a/main.py#L55-L92)
