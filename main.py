@@ -1,4 +1,5 @@
 import wx
+from wx.core import Panel
 
 # Panel for sized box
 class MyBoxSizer(wx.Panel):
@@ -48,6 +49,7 @@ class MyGridSizer(wx.Panel):
             gridSizer.Add(wx.Button(self, label = btn), 0, wx.EXPAND)
             self.SetSizer(gridSizer)
 
+# Panel for Button actions(events)
 class MyButtonEvent(wx.Panel):
     def __init__(self, parent):
         super().__init__(parent)
@@ -91,15 +93,55 @@ class MyButtonEvent(wx.Panel):
             self.label2.SetLabel("ON")
             event.GetEventObject().SetLabel("Click to ON")
 
+# Panel for checkbox and its events
+class MyCheckBox(wx.Panel):
+    def __init__(self, parent):
+        super(MyCheckBox, self).__init__(parent)
+        
+        checkBox1 = wx.CheckBox(self, label = "Car")
+        checkBox2 = wx.CheckBox(self, label = 'Bus')
+        
+        self.label1 = wx.StaticText(self, label = '')
+        self.label2 = wx.StaticText(self, label = '')
+        self.label3 = wx.StaticText(self, label = '')
+
+        #bind when any checkbox is clicked (use binding only one time)
+        # self.Bind(wx.EVT_CHECKBOX, self.onChecked)
+        checkBox1.Bind(wx.EVT_CHECKBOX, self.onChecked1)
+        checkBox2.Bind(wx.EVT_CHECKBOX, self.onChecked2)
+        
+        vbox = wx.BoxSizer(wx.VERTICAL)
+        vbox.Add(checkBox1)
+        vbox.Add(self.label1)
+        vbox.Add(checkBox2)
+        vbox.Add(self.label2)
+        vbox.Add(self.label3)
+        self.SetSizer(vbox)
+    
+    def onChecked(self, event):
+        cb = event.GetEventObject()
+        self.label3.SetLabelText(cb.GetLabel())
+        print('Checked')
+    
+    def onChecked1(self, event):
+        cb = event.GetEventObject()
+        self.label1.SetLabelText(str(cb.GetValue()))
+    
+    def onChecked2(self, event):
+        cb = event.GetEventObject()
+        self.label2.SetLabelText(str(cb.GetValue()))
+
+
 #Frame for the UI
 class MyFrame(wx.Frame):
     def __init__(self, parent, title):
-        super(MyFrame,self).__init__(parent, title=title, size=(500,300))
+        super(MyFrame,self).__init__(parent, title=title, size=(500,200))
         
         # add your panel here
         # self.panel = MyBoxSizer(self)
         # MyGridSizer(self)
-        MyButtonEvent(self)
+        # MyButtonEvent(self)
+        MyCheckBox(self)
 
 class MyApp(wx.App):
     def OnInit(self):
