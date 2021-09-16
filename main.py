@@ -131,6 +131,27 @@ class MyCheckBox(wx.Panel):
         cb = event.GetEventObject()
         self.label2.SetLabelText(str(cb.GetValue()))
 
+# Panel for Radio Button and its events
+class MyRadioButton(wx.Panel):
+    def __init__(self, parent):
+        super(MyRadioButton, self).__init__(parent)
+        
+        rb1 = wx.RadioButton(self, label = "Car")
+        rb2 = wx.RadioButton(self, label = "Bus")
+        
+        self.label = wx.StaticText(self, label = "")
+        
+        self.Bind(wx.EVT_RADIOBUTTON, self.onRadioButton)
+        
+        vbox = wx.BoxSizer(wx.VERTICAL)
+        vbox.Add(rb1)
+        vbox.Add(rb2)
+        vbox.Add(self.label)
+        self.SetSizer(vbox)
+    
+    def onRadioButton(self, event):
+        rb = event.GetEventObject()
+        self.label.SetLabel('Selected ' + rb.GetLabel())
 
 #Frame for the UI
 class MyFrame(wx.Frame):
@@ -141,7 +162,8 @@ class MyFrame(wx.Frame):
         # self.panel = MyBoxSizer(self)
         # MyGridSizer(self)
         # MyButtonEvent(self)
-        MyCheckBox(self)
+        # MyCheckBox(self)
+        MyRadioButton(self)
 
 class MyApp(wx.App):
     def OnInit(self):
