@@ -239,6 +239,29 @@ class MyTextCtrl(wx.Panel):
     def onTextCtrl1(self, event):
         self.label2.SetLabel('Typed text = '+ event.GetString())
 
+# Panel for MessageBox and different events
+class MyMessageBox(wx.Panel):
+    def __init__(self, parent):
+        super(MyMessageBox, self).__init__(parent)
+        
+        btn1  = wx.Button(self, label = "Message 1", pos = (10,10))
+        btn1.Bind(wx.EVT_BUTTON, self.onBtn1)
+        
+        btn2  = wx.Button(self, label = "Message 2", pos = (10,40))
+        btn2.Bind(wx.EVT_BUTTON, self.onBtn2)
+        
+        btn3  = wx.Button(self, label = "Message 3", pos = (10,70))
+        btn3.Bind(wx.EVT_BUTTON, self.onBtn3)
+    
+    def onBtn1(self, event):
+        wx.MessageBox('OK Message', caption =  "Message 1", style = wx.OK | wx.ICON_INFORMATION)
+    
+    def onBtn2(self, event):
+        wx.MessageBox('Warning Message', caption =  "Message 2", style = wx.OK | wx.ICON_WARNING)
+    
+    def onBtn3(self, event):
+        wx.MessageBox('error Message', caption =  "Message 3", style = wx.OK | wx.ICON_ERROR)
+
 #Frame for the UI
 class MyFrame(wx.Frame):
     def __init__(self, parent, title):
@@ -253,7 +276,8 @@ class MyFrame(wx.Frame):
         # MyRadioBox(self)
         # MySlider(self)
         # MyComboBox(self)
-        MyTextCtrl(self)
+        # MyTextCtrl(self)
+        MyMessageBox(self)
 
 class MyApp(wx.App):
     def OnInit(self):
