@@ -168,7 +168,7 @@ class MyRadioBox(wx.Panel):
         rb = event.GetEventObject()
         self.label.SetLabel('Pet selected ' + rb.GetStringSelection())
 
-# Panel for RadioBox and event
+# Panel for MySlider 
 class MySlider(wx.Panel):
     def __init__(self, parent):
         super(MySlider,self).__init__(parent)
@@ -186,6 +186,32 @@ class MySlider(wx.Panel):
         font.SetPointSize(val)
         self.label.SetFont(font)
 
+class MyComboBox(wx.Panel):
+    def __init__(self, parent):
+        super(MyComboBox,self).__init__(parent)
+        
+        label = wx.StaticText(self, label= 'Select any Language', pos = (10,10))
+        self.label1  = wx.StaticText(self, label = '',  pos = (100, 30))
+        self.label2  = wx.StaticText(self, label = '',  pos = (100, 70))
+        
+        # list that will be shown in Combobox(editable)
+        languages = ['C', 'C++', 'Python', 'Dart', 'Golang', 'Rust', 'Java']
+        combo = wx.ComboBox(self, choices = languages, pos = (10,30))
+        combo.Bind(wx.EVT_TEXT, self.onCombo)
+        # combo.Bind(wx.EVT_COMBOBOX, self.onCombo)
+        
+        # list that will be shown in Choice(read-only)
+        choice = wx.Choice(self, choices = languages, pos = (10,70))
+        choice.Bind(wx.EVT_CHOICE, self.onChoice)
+    
+    def onCombo(self, event):
+        cb = event.GetEventObject()
+        self.label1.SetLabel('Combo selection ' + cb.GetValue())
+    
+    def onChoice(self, event):
+        cb = event.GetEventObject()
+        self.label2.SetLabel('Choice selection ' + cb.GetString(cb.GetSelection()))
+
 #Frame for the UI
 class MyFrame(wx.Frame):
     def __init__(self, parent, title):
@@ -198,7 +224,8 @@ class MyFrame(wx.Frame):
         # MyCheckBox(self)
         # MyRadioButton(self)
         # MyRadioBox(self)
-        MySlider(self)
+        # MySlider(self)
+        MyComboBox(self)
 
 class MyApp(wx.App):
     def OnInit(self):
