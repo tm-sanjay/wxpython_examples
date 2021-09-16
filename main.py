@@ -212,6 +212,33 @@ class MyComboBox(wx.Panel):
         cb = event.GetEventObject()
         self.label2.SetLabel('Choice selection ' + cb.GetString(cb.GetSelection()))
 
+class MyTextCtrl(wx.Panel):
+    def __init__(self, parent):
+        super(MyTextCtrl, self).__init__(parent)
+        
+        label  = wx.StaticText(self, label = "Text Field", pos = (10,10))
+        self.label1 = wx.StaticText(self, label = "Type and press Enter", pos = (150,35))
+        # enter the text and press ender
+        txt = wx.TextCtrl(self, pos = (10,30), style = wx.TE_PROCESS_ENTER)
+        txt.Bind(wx.EVT_TEXT_ENTER, self.onTextCtrl)
+        
+        self.label2 = wx.StaticText(self, label = "Type something", pos = (150,65))
+        txt1 = wx.TextCtrl(self, pos = (10,60))
+        txt1.Bind(wx.EVT_TEXT, self.onTextCtrl1)
+        
+        # read-only style
+        txt2 = wx.TextCtrl(self, value = "Read Only Text",
+                            style = wx.TE_READONLY | wx.TE_CENTER, pos = (10,90))
+        # Multiline form
+        label3 = wx.StaticText(self, label ='Multi Line', pos = (230,125))
+        txt3 = wx.TextCtrl(self, size = (200,100),style = wx.TE_MULTILINE, pos = (10,120))
+    
+    def onTextCtrl(self, event):
+        self.label1.SetLabel('Entered text = '+ event.GetString())
+    
+    def onTextCtrl1(self, event):
+        self.label2.SetLabel('Typed text = '+ event.GetString())
+
 #Frame for the UI
 class MyFrame(wx.Frame):
     def __init__(self, parent, title):
@@ -225,7 +252,8 @@ class MyFrame(wx.Frame):
         # MyRadioButton(self)
         # MyRadioBox(self)
         # MySlider(self)
-        MyComboBox(self)
+        # MyComboBox(self)
+        MyTextCtrl(self)
 
 class MyApp(wx.App):
     def OnInit(self):
