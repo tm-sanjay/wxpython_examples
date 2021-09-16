@@ -1,5 +1,5 @@
 import wx
-from wx.core import Panel
+from wx.core import Choice, Panel
 
 # Panel for sized box
 class MyBoxSizer(wx.Panel):
@@ -136,7 +136,8 @@ class MyRadioButton(wx.Panel):
     def __init__(self, parent):
         super(MyRadioButton, self).__init__(parent)
         
-        rb1 = wx.RadioButton(self, label = "Car")
+        rb1 = wx.RadioButton(self, label = "Car", style = wx.RB_GROUP)
+        # try style = wx.RB_SINGLE
         rb2 = wx.RadioButton(self, label = "Bus")
         
         self.label = wx.StaticText(self, label = "")
@@ -153,6 +154,38 @@ class MyRadioButton(wx.Panel):
         rb = event.GetEventObject()
         self.label.SetLabel('Selected ' + rb.GetLabel())
 
+# Panel for RadioBox and event
+class MyRadioBox(wx.Panel):
+    def __init__(self, parent):
+        super(MyRadioBox,self).__init__(parent)
+        
+        self.label = wx.StaticText(self, label = "", pos = (120,20))
+        rbList = ['Cat','Dog','Bird']
+        rbox = wx.RadioBox(self, label = 'RadioBox', pos = (20,20), choices = rbList,style = wx.RA_SPECIFY_ROWS)
+        self.Bind(wx.EVT_RADIOBOX, self.onRadioBox)
+    
+    def onRadioBox(self, event):
+        rb = event.GetEventObject()
+        self.label.SetLabel('Pet selected ' + rb.GetStringSelection())
+
+# Panel for RadioBox and event
+class MySlider(wx.Panel):
+    def __init__(self, parent):
+        super(MySlider,self).__init__(parent)
+        slider  = wx.Slider(self, value = 10, minValue = 1,  maxValue = 20, pos = (10,10),
+                            style = wx.SL_HORIZONTAL|wx.SL_LABELS)
+        
+        self.label = wx.StaticText(self, label = 'wxPython', pos = (30, 50))
+        slider.Bind(wx.EVT_SLIDER, self.onSlider)
+    
+    def onSlider(self, event):
+        # Change the font size using slider
+        obj = event.GetEventObject()
+        val = obj.GetValue()
+        font  = self.GetFont()
+        font.SetPointSize(val)
+        self.label.SetFont(font)
+
 #Frame for the UI
 class MyFrame(wx.Frame):
     def __init__(self, parent, title):
@@ -163,7 +196,9 @@ class MyFrame(wx.Frame):
         # MyGridSizer(self)
         # MyButtonEvent(self)
         # MyCheckBox(self)
-        MyRadioButton(self)
+        # MyRadioButton(self)
+        # MyRadioBox(self)
+        MySlider(self)
 
 class MyApp(wx.App):
     def OnInit(self):
