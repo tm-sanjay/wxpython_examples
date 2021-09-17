@@ -49,6 +49,31 @@ class MyGridSizer(wx.Panel):
             gridSizer.Add(wx.Button(self, label = btn), 0, wx.EXPAND)
             self.SetSizer(gridSizer)
 
+# Panel for Flex Grid Sizer
+class MyFlexGridSizer(wx.Panel):
+    def __init__(self, parent):
+        super(MyFlexGridSizer, self).__init__(parent)
+        
+        name = wx.StaticText(self, label = "Name") 
+        author = wx.StaticText(self, label = "Age") 
+        bio = wx.StaticText(self, label = "Describe yourself")
+
+        tc1 = wx.TextCtrl(self) 
+        tc2 = wx.TextCtrl(self) 
+        tc3 = wx.TextCtrl(self, style = wx.TE_MULTILINE)
+
+        hbox = wx.BoxSizer(wx.HORIZONTAL)
+        # Wx.FlexiGridSizer(rows, cols, xgap, ygap)
+        fgs = wx.FlexGridSizer(3, 2, 10, 10)
+
+        fgs.AddMany([(name), (tc1, 1, wx.EXPAND),
+                    (author), (tc2, 1, wx.EXPAND),
+                    bio, (tc3, 1, wx.EXPAND)])
+        fgs.AddGrowableRow(2, 1) 
+        fgs.AddGrowableCol(1, 1)  
+        hbox.Add(fgs, proportion = 2, flag = wx.ALL|wx.EXPAND, border=15)
+        self.SetSizer(hbox)
+
 # Panel for Button actions(events)
 class MyButtonEvent(wx.Panel):
     def __init__(self, parent):
@@ -244,13 +269,13 @@ class MyMessageBox(wx.Panel):
     def __init__(self, parent):
         super(MyMessageBox, self).__init__(parent)
         
-        btn1  = wx.Button(self, label = "Message 1", pos = (10,10))
+        btn1  = wx.Button(self, label = "Info", pos = (10,10))
         btn1.Bind(wx.EVT_BUTTON, self.onBtn1)
         
-        btn2  = wx.Button(self, label = "Message 2", pos = (10,40))
+        btn2  = wx.Button(self, label = "Warning", pos = (10,40))
         btn2.Bind(wx.EVT_BUTTON, self.onBtn2)
         
-        btn3  = wx.Button(self, label = "Message 3", pos = (10,70))
+        btn3  = wx.Button(self, label = "Error", pos = (10,70))
         btn3.Bind(wx.EVT_BUTTON, self.onBtn3)
     
     def onBtn1(self, event):
@@ -260,7 +285,7 @@ class MyMessageBox(wx.Panel):
         wx.MessageBox('Warning Message', caption =  "Message 2", style = wx.OK | wx.ICON_WARNING)
     
     def onBtn3(self, event):
-        wx.MessageBox('error Message', caption =  "Message 3", style = wx.OK | wx.ICON_ERROR)
+        wx.MessageBox('Error Message', caption =  "Message 3", style = wx.OK | wx.ICON_ERROR)
 
 #Frame for the UI
 class MyFrame(wx.Frame):
@@ -270,6 +295,7 @@ class MyFrame(wx.Frame):
         # add your panel here
         # self.panel = MyBoxSizer(self)
         # MyGridSizer(self)
+        MyFlexGridSizer(self)
         # MyButtonEvent(self)
         # MyCheckBox(self)
         # MyRadioButton(self)
@@ -277,7 +303,7 @@ class MyFrame(wx.Frame):
         # MySlider(self)
         # MyComboBox(self)
         # MyTextCtrl(self)
-        MyMessageBox(self)
+        # MyMessageBox(self)
 
 class MyApp(wx.App):
     def OnInit(self):
