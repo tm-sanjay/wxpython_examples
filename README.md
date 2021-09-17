@@ -12,6 +12,10 @@ Gridsizer with `label` as elements, chek the [code](https://github.com/tm-sanjay
 ![Image of Grid Sizer](./screenshots/gridsizer1.PNG)  
 Gridsizer with `button` as elements, check the [code](https://github.com/tm-sanjay/wxpython_examples/blob/f05ef1e9451f21a5fc4da00003ddb926963e1ac6/main.py#L46-L49)
 
+## Flex Grid Sizer
+![Image of Flex Grid Sizer](./screenshots/flexgridsizer.PNG)  
+Chek the [code]()
+
 ## Button Event
 ![Image of Button Event](./screenshots/button_event.PNG)  
 Button with click event, toggle, bitmap image. Check the [code](https://github.com/tm-sanjay/wxpython_examples/blob/273e2a55d8ed96001d5521890d6603fecac8985a/main.py#L55-L92)
@@ -40,5 +44,14 @@ Choose an element form a list using comboBox and it is `editable`
 Choose an element form a list using choice and it is `read-only`, check the [code](https://github.com/tm-sanjay/wxpython_examples/blob/79d9db7218733c1bec6f9425ce7d381501b058a3/main.py#L189-L213)
 
 ## TextCtrl (Text Field)
-![Image of TextCtrl](./screenshots/textctrl.PNG)  
+![Image of TextCtrl](./screenshots/textCtrl.PNG)  
 TextCtrl 4 types: when enter, while typing, read-only & multiline. Check the [code](https://github.com/tm-sanjay/wxpython_examples/blob/79d9db7218733c1bec6f9425ce7d381501b058a3/main.py#L215-L240)  
+
+## MessageBox 
+<p float="left">
+<img src="./screenshots/messagebox1.PNG" alt="Info" width="310">
+<img src="./screenshots/messagebox2.PNG" alt="warning"  width="310">
+</p>
+<img src="./screenshots/messagebox3.PNG" alt="error" width="310">  
+
+MessageBox in 3 types, check the [code]( )
