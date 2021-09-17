@@ -40,5 +40,5 @@ Choose an element form a list using comboBox and it is `editable`
 Choose an element form a list using choice and it is `read-only`, check the [code](https://github.com/tm-sanjay/wxpython_examples/blob/79d9db7218733c1bec6f9425ce7d381501b058a3/main.py#L189-L213)
 
 ## TextCtrl (Text Field)
-![Image of TextCtrl](./screenshots/textCtrl.PNG)  
+![Image of TextCtrl](./screenshots/textctrl.PNG)  
 TextCtrl 4 types: when enter, while typing, read-only & multiline. Check the [code](https://github.com/tm-sanjay/wxpython_examples/blob/79d9db7218733c1bec6f9425ce7d381501b058a3/main.py#L215-L240)  
